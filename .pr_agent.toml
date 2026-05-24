@@ -1,2 +1,2 @@
-[PR_REVIEWER]
-inline_code_comments = true
+[review_agent]
+comments_location_policy = "inline"
