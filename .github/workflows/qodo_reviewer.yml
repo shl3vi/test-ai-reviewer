@@ -1,0 +1,21 @@
+name: Qodo PR Agent
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  qodo_review_job:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+      contents: read
+    steps:
+      - name: Run Qodo PR Agent
+        uses: the-pr-agent/pr-agent@main
+        env:
+          # כאן אנחנו מכריחים אותו להשתמש במודל הזול והמהיר
+          PR_AGENT.LLM.MODEL: "gpt-4o-mini"
+          # ודא שהגדרת את המפתח הזה ב-Secrets של הריפו
+          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
